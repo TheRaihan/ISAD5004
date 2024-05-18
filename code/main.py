@@ -5,6 +5,8 @@ class Person:
     def __init__(self, name, birthday):
         self.name = name
         self.birthday = birthday
+        self.generation = self.getGeneration()
+        self.life_path_num = self.get_life_path_number()
 
     def get_lucky_color(self, life_path_number):
         """Determines the lucky color based on the Life Path Number."""
@@ -19,7 +21,16 @@ class Person:
         master_number = [11,22,33]
         return num in master_number
 
-    def get_life_path_number(self,num):
+    def get_life_path_number(self):
+        life_path_num = int(self.birthday)
+        while life_path_num > 9:
+            life_path_num = self.sum_digits(life_path_num)
+            if self.is_master_number(life_path_num):
+                print(f"{life_path_num} is master number")
+                break
+        return life_path_num
+
+    def sum_digits(self,num):
         total = 0
         while num > 0:
             digit = num%10
@@ -27,10 +38,28 @@ class Person:
             num = num//10
         return total
 
-class LifePathCalculator:
-    @staticmethod
-    def calculate(birthday):
-        pass
+    def getGeneration(self):
+        year = int(self.birthday[-4:])
+        if 1901 <= year <= 1945:
+            return "Silent Generation"
+        elif 1946 <= year <= 1964:
+            return "Baby Boomers"
+        elif 1965 <= year <= 1979:
+            return "Generation X"
+        elif 1980 <= year <= 1994:
+            return "Millennials"
+        elif 1995 <= year <= 2009:
+            return "Generation Z"
+        elif 2010 <= year <= 2024:
+            return "Generation Alpha"
+        else:
+            return "Unknown Generation"
+
+
+# class LifePathCalculator:
+#     @staticmethod
+#     def calculate(birthday):
+#         pass
 
 class BirthdayComparer:
     @staticmethod
@@ -57,39 +86,19 @@ def get_valid_birthday_input():
 
 
 def main():
-    # person1 = Person("Alice", "1990-05-15")
-    # person2 = Person("Bob", "1985-10-20")
-
-    name = "Raihan"
     birthdate = get_valid_birthday_input()
-    person = Person(name, birthdate)
+    person = Person("Raihan", birthdate)
 
-    life_path_num = int(birthdate)
-    while life_path_num > 9:
-        life_path_num = person.get_life_path_number(life_path_num)
-        if person.is_master_number(life_path_num):
-            print(f"{life_path_num} is master number")
-            break
+    person2 = Person("Anakin Skywalker", "16111942")
 
-    print(life_path_num)
-    print(person.get_lucky_color(life_path_num))
+    print(person.generation)
 
-    # person1_life_path_number = LifePathCalculator.calculate(person1.birthday)
-
-    # person1_lucky_colour = person1.identify_lucky_colour()
-
-    # is_person1_master_number = person1.is_master_number()
-
-    # same_life_path_number = BirthdayComparer.compare(person1, person2)
-
-    # print(f"{person1.name}'s life path number: {person1_life_path_number}")
-
-
-    # print(f"{person1.name}'s lucky colour: {person1_lucky_colour}")
-
-    # print(f"{person1.name} is a master number: {is_person1_master_number}")
-
-    # print(f"Life path numbers of {person1.name} and {person2.name} are the same: {same_life_path_number}")
+    print(f"{person.name} life path number is {person.life_path_num}\n{person2.name} life path number is {person2.life_path_num}")
+    
+    if(person.life_path_num == person2.life_path_num):
+        print("life path number is same")
+    else:
+        print("life path number is not same")
 
 
 if __name__ == '__main__':
