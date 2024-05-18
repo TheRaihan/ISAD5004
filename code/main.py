@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 class Person:
     def __init__(self, name, birthday):
         self.name = name
@@ -54,12 +53,6 @@ class Person:
             return "Generation Alpha"
         else:
             return "Unknown Generation"
-
-
-# class LifePathCalculator:
-#     @staticmethod
-#     def calculate(birthday):
-#         pass
 
 class BirthdayComparer:
     @staticmethod
