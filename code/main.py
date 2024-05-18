@@ -53,10 +53,15 @@ class Person:
         else:
             return "Unknown Generation"
 
-# class BirthdayComparer:
-#     @staticmethod
-#     def compare(person1, person2):
-#         pass
+class BirthdayComparer:
+    @staticmethod
+    def compare(person1, person2):
+        print(f"{person1.name} life path number is {person1.life_path_num}\n{person2.name} life path number is {person2.life_path_num}")
+
+        if(person1.life_path_num == person2.life_path_num):
+            print("life path number is same")
+        else:
+            print("life path number is not same")
 
 def parse_birthday(birthday):
     try:
@@ -76,24 +81,13 @@ def get_valid_birthday_input():
         else:
             print("Invalid birthday format. Please use either DD-MM-YYYY or DD Month YYYY.")
 
-
 def main():
     birthdate = get_valid_birthday_input()
     person = Person("Raihan", birthdate)
-
     person2 = Person("Anakin Skywalker", "16111942")
-
-    print("Lucky Color: ", person.get_lucky_color())
-
+    print("Lucky Color:", person.get_lucky_color())
     print(person.generation)
-
-    print(f"{person.name} life path number is {person.life_path_num}\n{person2.name} life path number is {person2.life_path_num}")
-    
-    if(person.life_path_num == person2.life_path_num):
-        print("life path number is same")
-    else:
-        print("life path number is not same")
-
+    BirthdayComparer.compare(person,person2)
 
 if __name__ == '__main__':
     main()
