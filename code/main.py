@@ -5,7 +5,7 @@ class Person:
     def __init__(self, name, birthday):
         self.name = name
         self.birthday = birthday
-        self.generation = self.getGeneration()
+        # self.generation = self.getGeneration()
         self.life_path_num = self.get_life_path_number()
 
     def get_lucky_color(self, life_path_number):
@@ -37,23 +37,6 @@ class Person:
             total = total + digit
             num = num//10
         return total
-
-    def getGeneration(self):
-        year = int(self.birthday[-4:])
-        if 1901 <= year <= 1945:
-            return "Silent Generation"
-        elif 1946 <= year <= 1964:
-            return "Baby Boomers"
-        elif 1965 <= year <= 1979:
-            return "Generation X"
-        elif 1980 <= year <= 1994:
-            return "Millennials"
-        elif 1995 <= year <= 2009:
-            return "Generation Z"
-        elif 2010 <= year <= 2024:
-            return "Generation Alpha"
-        else:
-            return "Unknown Generation"
 
 
 # class LifePathCalculator:
@@ -91,7 +74,7 @@ def main():
 
     person2 = Person("Anakin Skywalker", "16111942")
 
-    print(person.generation)
+    # print(person.generation)
 
     print(f"{person.name} life path number is {person.life_path_num}\n{person2.name} life path number is {person2.life_path_num}")
     
