@@ -7,14 +7,13 @@ class Person:
         self.generation = self.getGeneration()
         self.life_path_num = self.get_life_path_number()
 
-    def get_lucky_color(self, life_path_number):
-        """Determines the lucky color based on the Life Path Number."""
+    def get_lucky_color(self):
         lucky_colors = {
             1: "Red", 2: "Orange", 3: "Yellow", 4: "Green", 5: "Blue",
             6: "Indigo", 7: "Violet", 8: "Gray", 9: "Gold",
             11: "Silver", 22: "Platinum", 33: "Diamond"
         }
-        return lucky_colors.get(life_path_number)
+        return lucky_colors.get(self.life_path_num)
 
     def is_master_number(self,num):
         master_number = [11,22,33]
@@ -54,10 +53,10 @@ class Person:
         else:
             return "Unknown Generation"
 
-class BirthdayComparer:
-    @staticmethod
-    def compare(person1, person2):
-        pass
+# class BirthdayComparer:
+#     @staticmethod
+#     def compare(person1, person2):
+#         pass
 
 def parse_birthday(birthday):
     try:
@@ -83,6 +82,8 @@ def main():
     person = Person("Raihan", birthdate)
 
     person2 = Person("Anakin Skywalker", "16111942")
+
+    print("Lucky Color: ", person.get_lucky_color())
 
     print(person.generation)
 
