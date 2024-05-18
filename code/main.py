@@ -22,19 +22,11 @@ class Person:
     def get_life_path_number(self):
         life_path_num = int(self.birthday)
         while life_path_num > 9:
-            life_path_num = self.sum_digits(life_path_num)
+            life_path_num = Helper.sum_digits(life_path_num)
             if self.is_master_number(life_path_num):
                 print(f"{life_path_num} is master number")
                 break
         return life_path_num
-
-    def sum_digits(self,num):
-        total = 0
-        while num > 0:
-            digit = num%10
-            total = total + digit
-            num = num//10
-        return total
 
     def getGeneration(self):
         year = int(self.birthday[-4:])
@@ -53,40 +45,51 @@ class Person:
         else:
             return "Unknown Generation"
 
-class BirthdayComparer:
+class Helper:
     @staticmethod
-    def compare(person1, person2):
+    def sum_digits(num):
+        total = 0
+        while num > 0:
+            digit = num%10
+            total = total + digit
+            num = num//10
+        return total
+
+    @staticmethod
+    def lifePathCompare(person1, person2):
         print(f"{person1.name} life path number is {person1.life_path_num}\n{person2.name} life path number is {person2.life_path_num}")
         if(person1.life_path_num == person2.life_path_num):
             print("life path number is same")
         else:
             print("life path number is not same")
-
-def parse_birthday(birthday):
-    try:
-        return datetime.strptime(birthday, "%d-%m-%Y").strftime("%d%m%Y")
-    except ValueError:
+    
+    @staticmethod
+    def parse_birthday(birthday):
         try:
-            return datetime.strptime(birthday, "%d %B %Y").strftime("%d%m%Y")
+            return datetime.strptime(birthday, "%d-%m-%Y").strftime("%d%m%Y")
         except ValueError:
-            return False
+            try:
+                return datetime.strptime(birthday, "%d %B %Y").strftime("%d%m%Y")
+            except ValueError:
+                return False
 
-def get_valid_birthday_input():
-    while True:
-        birthdate = input("Enter birthday (DD-MM-YYYY or DD Month YYYY): ")
-        birthdate = parse_birthday(birthdate)
-        if birthdate:
-            return birthdate
-        else:
-            print("Invalid birthday format. Please use either DD-MM-YYYY or DD Month YYYY.")
+    @staticmethod
+    def get_valid_birthday_input():
+        while True:
+            birthdate = input("Enter birthday (DD-MM-YYYY or DD Month YYYY): ")
+            birthdate = Helper.parse_birthday(birthdate)
+            if birthdate:
+                return birthdate
+            else:
+                print("Invalid birthday format. Please use either DD-MM-YYYY or DD Month YYYY.")
 
 def main():
-    birthdate = get_valid_birthday_input()
+    birthdate = Helper.get_valid_birthday_input()
     person = Person("Raihan", birthdate)
     person2 = Person("Anakin Skywalker", "16111942")
     print("Lucky Color:", person.get_lucky_color())
     print(person.generation)
-    BirthdayComparer.compare(person,person2)
+    Helper.lifePathCompare(person,person2)
 
 if __name__ == '__main__':
     main()
