@@ -57,7 +57,6 @@ class BirthdayComparer:
     @staticmethod
     def compare(person1, person2):
         print(f"{person1.name} life path number is {person1.life_path_num}\n{person2.name} life path number is {person2.life_path_num}")
-
         if(person1.life_path_num == person2.life_path_num):
             print("life path number is same")
         else:
