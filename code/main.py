@@ -15,15 +15,11 @@ class Person:
         }
         return lucky_colors.get(self.life_path_num)
 
-    def is_master_number(self,num):
-        master_number = [11,22,33]
-        return num in master_number
-
     def get_life_path_number(self):
         life_path_num = int(self.birthday)
         while life_path_num > 9:
             life_path_num = Helper.sum_digits(life_path_num)
-            if self.is_master_number(life_path_num):
+            if Helper.is_master_number(life_path_num):
                 print(f"{life_path_num} is master number")
                 break
         return life_path_num
@@ -54,6 +50,11 @@ class Helper:
             total = total + digit
             num = num//10
         return total
+
+    @staticmethod
+    def is_master_number(num):
+        master_number = [11,22,33]
+        return num in master_number
 
     @staticmethod
     def lifePathCompare(person1, person2):
