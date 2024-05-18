@@ -15,8 +15,8 @@ class Person:
         pass
 
     def is_master_number(self,num):
-        master_number = [11,22,23]
-        return True
+        master_number = [11,22,33]
+        return num in master_number
 
     def get_life_path_number(self,num):
         total = 0
