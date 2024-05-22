@@ -58,31 +58,22 @@ class Helper:
 
     @staticmethod
     def lifePathCompare(person1, person2):
-        print(f"{person1.name} life path number is {person1.life_path_num}\n{person2.name} life path number is {person2.life_path_num}")
-        if(person1.life_path_num == person2.life_path_num):
-            print("life path number is same")
-        else:
-            print("life path number is not same")
+        return person1.life_path_num == person2.life_path_num
     
-    @staticmethod
-    def parse_birthday(birthday):
-        try:
-            return datetime.strptime(birthday, "%d-%m-%Y").strftime("%d%m%Y")
-        except ValueError:
-            try:
-                return datetime.strptime(birthday, "%d %B %Y").strftime("%d%m%Y")
-            except ValueError:
-                return False
 
     @staticmethod
     def get_valid_birthday_input():
         while True:
             birthdate = input("Enter birthday (DD-MM-YYYY or DD Month YYYY): ")
-            birthdate = Helper.parse_birthday(birthdate)
-            if birthdate:
-                return birthdate
-            else:
-                print("Invalid birthday format. Please use either DD-MM-YYYY or DD Month YYYY.")
+            try:
+                formatted_date = datetime.strptime(birthdate, "%d-%m-%Y").strftime("%d%m%Y")
+                return formatted_date
+            except ValueError:
+                try:
+                    formatted_date = datetime.strptime(birthdate, "%d %B %Y").strftime("%d%m%Y")
+                    return formatted_date
+                except ValueError:
+                    print("Invalid birthday format. Please use either DD-MM-YYYY or DD Month YYYY.\n")
 
 def main():
     birthdate = Helper.get_valid_birthday_input()
@@ -90,7 +81,13 @@ def main():
     person2 = Person("Anakin Skywalker", "16111942")
     print("Lucky Color:", person.get_lucky_color())
     print(person.generation)
-    Helper.lifePathCompare(person,person2)
+
+    print(f"{person.name} life path number is {person.life_path_num}\n{person2.name} life path number is {person2.life_path_num}")
+    if(Helper.lifePathCompare(person,person2)):
+        print("life path number is same")
+    else:
+        print("life path number is not same")
 
 if __name__ == '__main__':
     main()
+    
