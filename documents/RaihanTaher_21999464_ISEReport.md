@@ -1,5 +1,6 @@
-## Intruduction 
-This Python codebase is designed to handle findout life path numbers, lucky colors of people based on their birthdate using object-oriented programming. It includes functionality for parsing different birthday formats, determining generation, and validating user input. We can also findout if two person are from same life path number and whether that number is master number or not.
+# Intruduction 
+
+This Python codebase is designed to findout life path numbers, lucky colors of people based on their birthdate using object-oriented programming. It includes functionality for parsing different birthday formats, determining generation, and validating user input. We can also findout if two person are from same life path number and whether that number is master number or not.
 
 I applied modularity concept along with object-oriented programming to reduce coupling and to improve cohesiveness of the program. Here I also applied blackbox testing and whitebox testing depending which one is more appropriate for that module. 
 
@@ -17,9 +18,9 @@ At the beginning, I'm thinking about after doing initial setup in main branch, I
 
 Their purpose is self explainatory, after each job is done and tested to will be merged in the main branch. Thats the initial plan, which might slightly change while developing.
 
-## Module Description 
+# Module Description 
 
-First I thought about having a Class (Person) for the person's birthday we are working on, then needed properties and method for determining life path  number, lucky color and generation. Then the other functions we might need for implementation will be declared globally. This way we will have one sub module for one well defined task which is the ultimate goal we want to achieve in modularity. 
+First I thought about having a Class (Person) for the person we are working on, in that we will have properties and method for determining life path  number, lucky color and generation. Then the other functions we might need for implementation will be declared globally. This way we will have one sub module for one well defined task which is the ultimate goal we want to achieve in modularity. 
 
 Person Class
 This class represents a person with attributes such as name, birthday, generation, and life path number. It includes methods to determine a person's generation, calculate their life path number, and identify their lucky color based on their life path number.
@@ -52,14 +53,14 @@ By separating these concerns, the code is more maintainable, easier to understan
 - The birthday input is assumed to be either in DD-MM-YYYY or DD Month YYYY format. This is handled by the get_valid_birthday_input method, which converts the input to a consistent DDMMYYYY format.
 - I assumed the property name for the Person class and passed it as hard coded peremeter in the constructor. 
 
-## Modularity
+# Modularity
 While implementing the initial design using modularity concept I got better ideas of imprvoing mentainability and readability of the code. 
 
 - I moved my global methods to Helper class which opened rooms for future improvement, easier to understand and allows for independent testing of each class.
 
 - I used static methods in the Helper class because these methods do not rely on instance-specific data. They perform general tasks that can be utilized without needing an instance of the class, making them suitable for utility functions.
 
-- For unit testing I made two seperate class as well (TestPerson and TestHelper) for the respected classes.  
+- For unit testing I made two seperate class as well. TestPerson and TestHelper for the respected classes.  
 
 Now the final design separates the functionalities into two classes: Person and Helper. This adheres to the principle of separation of concerns, where Person handles the attributes and behaviors of an individual, and Helper provides utility functions to support these behaviors. 
 
@@ -81,11 +82,13 @@ Now the final design separates the functionalities into two classes: Person and 
 ### Encapsulation
 
 - **Person Class**: Encapsulates the logic for determining generation and life path number. Users of the class only need to know how to use the methods, not the implementation details.
+- 
 - **Helper Class**: Encapsulates utility functions, allowing them to be reused without exposing their internal logic to the rest of the program.
 
 ### Reusability
 
 - The static methods in the Helper class are designed to be reusable across different parts of the application without modification.
+  
 - Methods in the Person class are designed to handle specific tasks related to the individual's data, making them reusable for any Person object.
 
 ### Single Responsibility Principle (SRP)
@@ -99,7 +102,7 @@ Now the final design separates the functionalities into two classes: Person and 
 #### Code Clarity
 
 1. Are the class and method names descriptive?
-2. Are comments and docstrings used appropriately?
+2. Is there any redundant code?
 
 #### Functionality
 
@@ -133,7 +136,7 @@ Now the final design separates the functionalities into two classes: Person and 
 #### Code Clarity
 
 - The class and method names are descriptive and clear.
-- Additional comments and docstrings would improve understanding, especially in complex methods like `get_life_path_number`.
+- There is no redundant code that is worth mentioning
 
 #### Functionality
 
@@ -155,10 +158,6 @@ Now the final design separates the functionalities into two classes: Person and 
 - Unit tests cover the major functionalities and edge cases effectively.
 - Additional edge case tests, such as unusual but valid dates, would enhance coverage.
 
-#### Error Handling
-
-- Error handling is present, especially in input validation.
-- More validation in the Person class constructor could improve robustness.
 
 ## Refactoring Decisions
 
@@ -170,6 +169,7 @@ Now the final design separates the functionalities into two classes: Person and 
 Add them in a new class as static method. Example:
 
 ##### Before:
+
 ```python
     def sum_digits(num):
         total = 0
@@ -281,11 +281,19 @@ Refactored the method to do only one well defined job which is compare the life 
 
 - Ensure that any repeated logic in Helper methods is combined into a single method to avoid redundancy.
 
+## Execute the Program
+To run the program just execute the main.py file 
+````` 
+python3 ./code/main.py
+`````
+
+Then Enter a valid date with appropriate format (Please, Check the Screenshot)
 
 ![image info](./pictures/1.png)
 
 
 
+# Black Box Testing
 
 ## Equivalence Partitioning Test Cases
 
@@ -303,12 +311,12 @@ Here is the detailed approach and the test cases for each method:
 #### 1. `Person.get_life_path_number`
 
     Submodule: get_life_path_number
-    Imports:
-    Exports:
+    Imports: self (object)
+    Exports: result (int)
     This method calculates the life path number based on the birthday. We consider the birthday as an integer in `DDMMYYYY` format.
 
 
-| Category                | Test Data | Expected Result | 
+| Category                | Test Data      | Expected Result | 
 |-------------            |----------------|-----------------|
 | Not Master Number       | "01011901"     | 4               |
 | Master Number           | "20041998"     | 33              |
@@ -318,8 +326,8 @@ Here is the detailed approach and the test cases for each method:
 #### 2. `Helper.sum_digits`
 
     Submodule: get_life_path_number
-    Imports:
-    Exports:
+    Imports: num (int)
+    Exports: result (int)
     This method calculates the sum of the digits of a given number.
 
 
@@ -330,13 +338,12 @@ Here is the detailed approach and the test cases for each method:
 | Large number            | 987654321 | 45              |
 | Zero                    | 0         | 0               |
 
-**Test Cases:**
 
 #### 3. `Helper.is_master_number`
 
     Submodule: get_life_path_number
-    Imports:
-    Exports:
+    Imports: num (int)
+    Exports: result (boolean)
     This method checks if a number is a master number (11, 22, 33).
 
 | Category                |    Test Data | Expected Result |
@@ -349,9 +356,9 @@ Here is the detailed approach and the test cases for each method:
 
 #### 4. `Helper.lifePathCompare`
 
-    Submodule: get_life_path_number
-    Imports:
-    Exports:
+    Submodule: lifePathCompare
+    Imports: person1, person2 (objects)
+    Exports: result (boolean)
     This method compares the life path numbers of two persons.
 
 
@@ -362,15 +369,13 @@ Here is the detailed approach and the test cases for each method:
 | Invalid input (string)              | "5", 5     | False           |
 | Invalid input (None)                | None, 5    | False           | 
 
-## 5. `Helper.get_valid_birthday_input` (Mock input for testing)
+#### 5. `Helper.get_valid_birthday_input` (Mock input for testing)
 
-    Submodule: get_life_path_number
+    Submodule: get_valid_birthday_input
     Imports:
-    Exports:
+    Exports: birthday(string)
     This method prompts the user for a birthday and validates the input format.
     
-
-**Test Cases:**
 
 | Category                                        | Test Data                               | Expected Output  | 
 |-------------------------------------------------|-----------------------------------------|------------------|
@@ -381,3 +386,34 @@ Here is the detailed approach and the test cases for each method:
 ## Summary
 
 Equivalence partitioning helps us ensure that all different input scenarios are covered with a minimal number of test cases. The above tables summarize how we can test each module effectively using this approach. These test cases should be implemented in our `unittest` framework to ensure comprehensive testing of the `Person` and `Helper` classes.
+
+
+## Boundary Value Analysis
+
+We will apply Boundary Value Analysis to the following module:
+
+1. `Person.get_generation`
+
+        Submodule: get_generation
+        Imports: self (object)
+        Exports: generation (string)
+        This method calculates determines generation name based on the 
+ year from birthday.
+
+
+| Boundary                            | Test Data      | Expected Result       |
+|--------------------------------     |----------------|-----------------------|
+| Just below Silent Generation        | 1900           | "Unknown Generation"  |
+| Lower boundary of Silent Generation | 1901           | "Silent Generation"   |
+| Upper boundary of Silent Generation | 1945           | "Silent Generation"   |
+| Lower boundary of Baby Boomers      | 1946           | "Baby Boomers"        |
+| Upper boundary of Baby Boomers      | 1964           | "Baby Boomers"        |
+| Lower boundary of Generation X      | 1965           | "Generation X"        |
+| Upper boundary of Generation X      | 1979           | "Generation X"        |
+| Lower boundary of Millennials       | 1980           | "Millennials"         |
+| Upper boundary of Millennials       | 1994           | "Millennials"         |
+| Lower boundary of Generation Z      | 1995           | "Generation Z"        |
+| Upper boundary of Generation Z      | 2009           | "Generation Z"        |
+| Lower boundary of Generation Alpha  | 2010           | "Generation Alpha"    |
+| Upper boundary of Generation Alpha  | 2024           | "Generation Alpha"    |
+| Just above Generation Alpha         | 2025           | "Unknown Generation"  |
