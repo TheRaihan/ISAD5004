@@ -87,9 +87,9 @@ def main():
 
     print(f"{person2.name} life path number is {person2.life_path_num}")
     if(Helper.lifePathCompare(person,person2)):
-        print("Their life path number is same")
+        print("Their life path numbers are same")
     else:
-        print("Their life path number is not same")
+        print("Their life path number are not same")
 
 if __name__ == '__main__':
     main()

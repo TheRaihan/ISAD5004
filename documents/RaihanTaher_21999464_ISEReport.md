@@ -7,6 +7,16 @@ I applied modularity concept along with object-oriented programming to reduce co
 ## Git 
 At the beginning, I'm thinking about after doing initial setup in main branch, I'll do feature branch for all the distinct modules and then merge all of them in main branch. Ideally in software development its best practice to have a development branch and merge your feature branch there. Finally, when everything up and running fully tested, ready for release then it goes into main branch. But here as its a very small program and I'm the only developer here so for simplicity I'm not using the development branch for this program.
 
+#### Branch needed
+    - main
+    - input-birthday
+    - life-path-compare
+    - life-path-number
+    - lucky-color
+    - test-code
+
+Their purpose is self explainatory, after each job is done and tested to will be merged in the main branch. Thats the initial plan, which might slightly change while developing.
+
 ## Module Description 
 
 First I thought about having a Class (Person) for the person's birthday we are working on, then needed properties and method for determining life path  number, lucky color and generation. Then the other functions we might need for implementation will be declared globally. This way we will have one sub module for one well defined task which is the ultimate goal we want to achieve in modularity. 
@@ -172,12 +182,12 @@ Add them in a new class as static method. Example:
     def is_master_number(num):
         master_number = [11,22,33]
         return num in master_number
-        
+
     def lifePathCompare(person1, person2):
         return person1.life_path_num == person2.life_path_num
 ```
  ##### After
- 
+
 ```python
 class Helper:
     @staticmethod
@@ -197,7 +207,7 @@ class Helper:
     @staticmethod
     def lifePathCompare(person1, person2):
         return person1.life_path_num == person2.life_path_num
-    
+
 ```
 #### Refactor parse_birthday() and get_valid_birthday_input() functions:
 These two modules had strong coupling which made it very difficult to design test code for them. To eliminate coupling I merged them. Example:
@@ -258,7 +268,7 @@ Refactored the method to do only one well defined job which is compare the life 
     @staticmethod
     def lifePathCompare(person1, person2):
         return person1.life_path_num == person2.life_path_num
-    
+
     #then in main()
     ....
     if(Helper.lifePathCompare(person,person2)):
@@ -272,16 +282,102 @@ Refactored the method to do only one well defined job which is compare the life 
 - Ensure that any repeated logic in Helper methods is combined into a single method to avoid redundancy.
 
 
+![image info](./pictures/1.png)
 
 
 
 
-#### Branch needed
-    - main
-    - input-birthday
-    - life-path-compare
-    - life-path-number
-    - lucky-color
-    - test-code
+## Equivalence Partitioning Test Cases
 
-Their purpose is self explainatory, after each job is done and tested to will be merged in the main branch. Thats the initial plan, which might slightly change while developing.
+
+We will apply equivalence partitioning to the following modules and methods:
+
+1. `Person.get_life_path_number`
+2. `Helper.sum_digits`
+3. `Helper.is_master_number`
+4. `Helper.lifePathCompare`
+5. `Helper.get_valid_birthday_input`
+
+Here is the detailed approach and the test cases for each method:
+
+#### 1. `Person.get_life_path_number`
+
+    Submodule: get_life_path_number
+    Imports:
+    Exports:
+    This method calculates the life path number based on the birthday. We consider the birthday as an integer in `DDMMYYYY` format.
+
+
+| Category                | Test Data | Expected Result | 
+|-------------            |----------------|-----------------|
+| Not Master Number       | "01011901"     | 4               |
+| Master Number           | "20041998"     | 33              |
+| Minimum valid birthday. | "20012004"     | 9               |
+| Maximum valid birthday  | "31122024"     | 6               |
+
+#### 2. `Helper.sum_digits`
+
+    Submodule: get_life_path_number
+    Imports:
+    Exports:
+    This method calculates the sum of the digits of a given number.
+
+
+| Category                | Test Data | Expected Result | 
+|-------------            |-----------|-----------------|
+| one digit number        | 5         | 5               |
+| Multiple digit number   | 123       | 6               |
+| Large number            | 987654321 | 45              |
+| Zero                    | 0         | 0               |
+
+**Test Cases:**
+
+#### 3. `Helper.is_master_number`
+
+    Submodule: get_life_path_number
+    Imports:
+    Exports:
+    This method checks if a number is a master number (11, 22, 33).
+
+| Category                |    Test Data | Expected Result |
+|-------------            |--------------|-----------------|
+| Master Number           | 33           | True            |
+| Not a Master Number     | 10           | False           |  
+| Invalid Data type       | "eleven"     | False           |
+| Invalid Input           | None         | False           |
+| Invalid Data type       | [11]         | False           |
+
+#### 4. `Helper.lifePathCompare`
+
+    Submodule: get_life_path_number
+    Imports:
+    Exports:
+    This method compares the life path numbers of two persons.
+
+
+|      Category                       | Input      | Expected Result |
+|-----------------------------------  |-------     |-----------------|
+| Same life path number               | 5, 5       | True            |
+| Different life path number          | 1, 9       | False           | 
+| Invalid input (string)              | "5", 5     | False           |
+| Invalid input (None)                | None, 5    | False           | 
+
+## 5. `Helper.get_valid_birthday_input` (Mock input for testing)
+
+    Submodule: get_life_path_number
+    Imports:
+    Exports:
+    This method prompts the user for a birthday and validates the input format.
+    
+
+**Test Cases:**
+
+| Category                                        | Test Data                               | Expected Output  | 
+|-------------------------------------------------|-----------------------------------------|------------------|
+| Valid input (DD-MM-YYYY)                        | "01-01-2000\n"                          | "01012000"       | 
+| Valid input (DD Month YYYY)                     | "15 June 1995\n"                        | "15061995"       |
+| Multiple invalid inputs then by input           | "invalid\n22 Feb 2022\n05 May 2023\n"   | "05052023"       |
+
+## Summary
+
+Equivalence partitioning helps us ensure that all different input scenarios are covered with a minimal number of test cases. The above tables summarize how we can test each module effectively using this approach. These test cases should be implemented in our `unittest` framework to ensure comprehensive testing of the `Person` and `Helper` classes.
