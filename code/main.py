@@ -4,7 +4,7 @@ class Person:
     def __init__(self, name, birthday):
         self.name = name
         self.birthday = birthday
-        self.generation = self.getGeneration()
+        self.generation = self.get_generation()
         self.life_path_num = self.get_life_path_number()
 
     def get_lucky_color(self):
@@ -20,11 +20,10 @@ class Person:
         while life_path_num > 9:
             life_path_num = Helper.sum_digits(life_path_num)
             if Helper.is_master_number(life_path_num):
-                print(f"{life_path_num} is master number")
                 break
         return life_path_num
 
-    def getGeneration(self):
+    def get_generation(self):
         year = int(self.birthday[-4:])
         if 1901 <= year <= 1945:
             return "Silent Generation"
@@ -82,11 +81,15 @@ def main():
     print("Lucky Color:", person.get_lucky_color())
     print(person.generation)
 
-    print(f"{person.name} life path number is {person.life_path_num}\n{person2.name} life path number is {person2.life_path_num}")
+    print(f"{person.name} life path number is {person.life_path_num}")
+    if person.life_path_num in [11,22,33]:
+        print("Which is a Master Number")
+
+    print(f"{person2.name} life path number is {person2.life_path_num}")
     if(Helper.lifePathCompare(person,person2)):
-        print("life path number is same")
+        print("Their life path number is same")
     else:
-        print("life path number is not same")
+        print("Their life path number is not same")
 
 if __name__ == '__main__':
     main()

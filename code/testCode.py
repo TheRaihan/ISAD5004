@@ -1,7 +1,94 @@
 import unittest, sys,os, io
 from unittest.mock import Mock
+from datetime import datetime
 
 from main import Person, Helper
+
+
+class TestPerson(unittest.TestCase):
+
+    def test_life_path_number(self):
+        # Test case #1: Enters While loop
+        birthday = datetime.strptime("01-01-1901","%d-%m-%Y").strftime("%d%m%Y")
+        self.main = Person("test1", birthday)
+        self.assertEqual(4, self.main.get_life_path_number(), msg = "Test Case #1 Failed")
+
+        # Test case #2: Enters if in while loop
+        birthday = datetime.strptime("20 April 1998","%d %B %Y").strftime("%d%m%Y")
+        self.main = Person("test2", birthday)
+        self.assertEqual(33, self.main.get_life_path_number(), msg = "Test Case #2 Failed")
+
+        # Test case #3: Doesn't Enter Loop
+        birthday = datetime.strptime("20 January 2004","%d %B %Y").strftime("%d%m%Y")
+        self.main = Person("test3", birthday)
+        self.assertEqual(9, self.main.get_life_path_number(), msg = "Test Case #3 Failed")
+
+    
+    def test_get_generation(self):
+        # Test case #1: year falls within the Silent Generation (1901-1945)
+
+        birthday = datetime.strptime("01-01-1901","%d-%m-%Y").strftime("%d%m%Y")
+        self.main = Person("test1", birthday)
+        self.assertEqual("Silent Generation", self.main.get_generation(), msg = "Test Case #1 Failed (Lower Boundary)")
+
+        birthday = datetime.strptime("31-12-1945","%d-%m-%Y").strftime("%d%m%Y")
+        self.main = Person("test1", birthday)
+        self.assertEqual("Silent Generation", self.main.get_generation(), msg = "Test Case #1 Failed (Higher Boundary)")
+        
+        # Test case #2: year falls within the Baby Boomers
+
+        birthday = datetime.strptime("01 January 1946","%d %B %Y").strftime("%d%m%Y")
+        self.main = Person("test2", birthday)
+        self.assertEqual("Baby Boomers", self.main.get_generation(), msg = "Test Case #2 Failed (Lower Boundary)")
+
+        birthday = datetime.strptime("31-12-1964","%d-%m-%Y").strftime("%d%m%Y")
+        self.main = Person("test2", birthday)
+        self.assertEqual("Baby Boomers", self.main.get_generation(), msg = "Test Case #2 Failed (Higher Boundary)")
+
+        # Test case #3: year falls within the Generation X
+
+        birthday = datetime.strptime("01-01-1965","%d-%m-%Y").strftime("%d%m%Y")
+        self.main = Person("test3", birthday)
+        self.assertEqual("Generation X", self.main.get_generation(), msg = "Test Case #3 Failed (Lower Boundary)")
+
+        birthday = datetime.strptime("31 December 1979","%d %B %Y").strftime("%d%m%Y")
+        self.main = Person("test3", birthday)
+        self.assertEqual("Generation X", self.main.get_generation(), msg = "Test Case #3 Failed (Higher Boundary)")
+
+        # Test case #4: year falls within the Millennials
+
+        birthday = datetime.strptime("01 February 1980","%d %B %Y").strftime("%d%m%Y")
+        self.main = Person("test4", birthday)
+        self.assertEqual("Millennials", self.main.get_generation(), msg = "Test Case #4 Failed (Lower Boundary)")
+
+        birthday = datetime.strptime("30 November 1994","%d %B %Y").strftime("%d%m%Y")
+        self.main = Person("test4", birthday)
+        self.assertEqual("Millennials", self.main.get_generation(), msg = "Test Case #4 Failed (Higher Boundary)")
+
+        # Test case #5: year falls within the Generation Z
+
+        birthday = datetime.strptime("01-01-1995","%d-%m-%Y").strftime("%d%m%Y")
+        self.main = Person("test5", birthday)
+        self.assertEqual("Generation Z", self.main.get_generation(), msg = "Test Case #5 Failed (Lower Boundary)")
+
+        birthday = datetime.strptime("31-12-2009","%d-%m-%Y").strftime("%d%m%Y")
+        self.main = Person("test5", birthday)
+        self.assertEqual("Generation Z", self.main.get_generation(), msg = "Test Case #5 Failed (Higher Boundary)")
+
+        # Test case #6: year falls within the Generation Alpha
+
+        birthday = datetime.strptime("01-01-2010","%d-%m-%Y").strftime("%d%m%Y")    
+        self.main = Person("test6", birthday)
+        self.assertEqual("Generation Alpha", self.main.get_generation(), msg = "Test Case #6 Failed (Lower Boundary)")
+
+        birthday = datetime.strptime("31-12-2024","%d-%m-%Y").strftime("%d%m%Y")
+        self.main = Person("test6", birthday)
+        self.assertEqual("Generation Alpha", self.main.get_generation(), msg = "Test Case #6 Failed (Higher Boundary)")
+
+        # Test case #7: year outside known generations
+        birthday = datetime.strptime("31-12-2025","%d-%m-%Y").strftime("%d%m%Y")
+        self.main = Person("test6", birthday)
+        self.assertEqual("Unknown Generation", self.main.get_generation(), msg = 'Test Case #7 Failed')
 
 
 class TestHelper(unittest.TestCase):
@@ -25,7 +112,7 @@ class TestHelper(unittest.TestCase):
         self.assertEqual(result, "05052023")
         sys.stdin = sys.__stdin__
         
-    def testSumDigits(self):
+    def test_sum_digits(self):
         # Test case 1: sum of digits of a single digit number
         self.assertEqual(Helper.sum_digits(5), 5)
 
@@ -38,7 +125,7 @@ class TestHelper(unittest.TestCase):
         # Test case 4: sum of digits of zero
         self.assertEqual(Helper.sum_digits(0), 0)
 
-    def testIsMasterNumber(self):
+    def test_is_master_number(self):
         
         # Test case 1: num is a master number (33)
         self.assertTrue(Helper.is_master_number(33))
@@ -55,7 +142,7 @@ class TestHelper(unittest.TestCase):
         # Test case 5: num is a list
         self.assertFalse(Helper.is_master_number([11]))
 
-    def testLifePathCompare(self):
+    def test_life_path_compare(self):
         # Test case 1: num is a master number (11)
         person1 = Mock()
         person2 = Mock()
@@ -82,3 +169,10 @@ class TestHelper(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+
+
+
+# boundary value unit test
+#file input output
