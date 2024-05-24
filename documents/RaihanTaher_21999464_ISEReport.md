@@ -1,3 +1,9 @@
+# Assessment: Introduction to Software Engineering– ISAD1000/5004 2024 Semester 1
+**Student Name**: Raihan Taher  
+**Student ID**: 21999464 
+**Practical Class**: Wednesday  
+
+
 # Intruduction 
 
 This Python codebase is designed to findout life path numbers, lucky colors of people based on their birthdate using object-oriented programming. It includes functionality for parsing different birthday formats, determining generation, and validating user input. We can also findout if two person are from same life path number and whether that number is master number or not.
