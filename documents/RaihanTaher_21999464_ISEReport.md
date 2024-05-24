@@ -539,7 +539,7 @@ Log of the use of Version Control:
 
 ![image info](./pictures/log4.png)
 
-# Summary
+# Discussion
 
 ## Achievements
 
