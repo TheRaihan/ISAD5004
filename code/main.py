@@ -63,7 +63,7 @@ class Helper:
     @staticmethod
     def get_valid_birthday_input():
         while True:
-            birthdate = input("Enter birthday (DD-MM-YYYY or DD Month YYYY): ")
+            birthdate = input("\nEnter birthday (DD-MM-YYYY or DD Month YYYY): ")
             try:
                 formatted_date = datetime.strptime(birthdate, "%d-%m-%Y").strftime("%d%m%Y")
                 return formatted_date
@@ -72,7 +72,7 @@ class Helper:
                     formatted_date = datetime.strptime(birthdate, "%d %B %Y").strftime("%d%m%Y")
                     return formatted_date
                 except ValueError:
-                    print("Invalid birthday format. Please use either DD-MM-YYYY or DD Month YYYY.\n")
+                    print("\nInvalid birthday format. Please use either DD-MM-YYYY or DD Month YYYY.\n")
 
 def main():
     birthdate = Helper.get_valid_birthday_input()

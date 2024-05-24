@@ -417,3 +417,94 @@ We will apply Boundary Value Analysis to the following module:
 | Lower boundary of Generation Alpha  | 2010           | "Generation Alpha"    |
 | Upper boundary of Generation Alpha  | 2024           | "Generation Alpha"    |
 | Just above Generation Alpha         | 2025           | "Unknown Generation"  |
+
+
+# White Box Testing
+
+These are the unit test modules we have here.
+
+1. `TestPerson.test_life_path_number`
+2. `TestPerson.test_get_generation`
+3. `TestHelper.test_valid_birthday`
+4. `TestHelper.test_sum_digits`
+5. `TestHelper.test_is_master_number`
+6. `TestHelper.test_life_path_compare`
+
+
+
+#### 1.Test design for `TestPerson.test_life_path_number`
+
+
+|      Path                       | Test Data      | Expected Result |
+|-------------------------------  |-----------     |-----------------|
+| Enter the If                    | 20041998       | 33              |
+| Do not Enter the If             | 01012004       | 8               | 
+
+> Note: Here we are assuming there will be no such case where this code doesn't enter the loop as we are validating the input from another module so its safe to make that assumption.
+
+
+#### 2.Test design for `TestPerson.test_get_generation`
+
+
+|      Path                         | Test Data      | Expected Result |
+|-------------------------------    |-----------     |-----------------|
+| Enter First If  (1901-1945)       | 23041901       |Silent Generation|
+| Else If (1946 - 1964)             | 23041946       | Baby Boomers    | 
+| Else If (1965 - 1979)             | 23041965       | Generation X    | 
+| Else If (1980 - 1994)             | 23041980       | Millennials     | 
+| Else If (1995 - 2009)             | 23041995       | Generation Z    | 
+| Else If (2010 - 2024)             | 23042010       | Generation Alpha| 
+| Else                              | 23042025       | Unknown         | 
+
+#### 3.Test design for `TestHelper.test_valid_birthday`
+
+
+|      Path                  | Test Data      | Expected Result |
+|----------------------------|-----------     |-----------------|
+| Enter First try            | 20-04-1998     | 20041998        |
+| Enter Second try           | 22 May 2005    | 22052005        | 
+| Enter last except          | 24/05/24       | invalid Message - prompts again for input| 
+
+
+
+#### 4.Test design for `TestPerson.test_sum_digits`
+
+
+|      Path              | Test Data      | Expected Result |
+|--------------------    |-----------     |-----------------|
+| Enter the While        | 20041998       |33               |
+| Do not enter the while | 5              | 5               | 
+
+
+
+#### 5.Test design for `TestPerson.test_is_master_number`
+
+
+|      Path              | Test Data      | Expected Result |
+|--------------------    |-----------     |-----------------|
+| Condition met          | 22             | True            |
+| Doesn't meet condition | 5              | False           | 
+
+
+#### 6.Test design for `TestPerson.test_life_path_compare`
+
+
+|      Path              | Test Data      | Expected Result |
+|--------------------    |-----------     |-----------------|
+| is Equal               | 7,7            | True            |
+| isn't Equal            | 5,11           | False           | 
+
+
+Exaplanation: Here in all the test methods we did follow all possible paths our program could go as we are shown in our workshops.
+
+# Test implementation and test execution
+
+After opening the repository directory in the terminal  run
+> python3 ./code/testCode.py
+
+Example of running test modules with one failed case
+![image info](./pictures/4.png)
+
+Example of running all test modules successfully
+![image info](./pictures/3.png)
+

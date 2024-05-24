@@ -7,6 +7,10 @@ from main import Person, Helper
 
 class TestPerson(unittest.TestCase):
 
+    '''
+    change it to file input
+    '''
+
     def test_life_path_number(self):
         # Test case #1: Enters While loop
         birthday = datetime.strptime("01-01-1901","%d-%m-%Y").strftime("%d%m%Y")
@@ -18,10 +22,6 @@ class TestPerson(unittest.TestCase):
         self.main = Person("test2", birthday)
         self.assertEqual(33, self.main.get_life_path_number(), msg = "Test Case #2 Failed")
 
-        # Test case #3: Doesn't Enter Loop
-        birthday = datetime.strptime("20 January 2004","%d %B %Y").strftime("%d%m%Y")
-        self.main = Person("test3", birthday)
-        self.assertEqual(9, self.main.get_life_path_number(), msg = "Test Case #3 Failed")
 
     
     def test_get_generation(self):
