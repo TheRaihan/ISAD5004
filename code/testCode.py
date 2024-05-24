@@ -7,21 +7,33 @@ from main import Person, Helper
 
 class TestPerson(unittest.TestCase):
 
-    '''
-    change it to file input
-    '''
-
     def test_life_path_number(self):
-        # Test case #1: Enters While loop
-        birthday = datetime.strptime("01-01-1901","%d-%m-%Y").strftime("%d%m%Y")
-        self.main = Person("test1", birthday)
-        self.assertEqual(4, self.main.get_life_path_number(), msg = "Test Case #1 Failed")
+        input_file = "code/input.txt"
+        output_file = "code/output.txt"
 
-        # Test case #2: Enters if in while loop
-        birthday = datetime.strptime("20 April 1998","%d %B %Y").strftime("%d%m%Y")
-        self.main = Person("test2", birthday)
-        self.assertEqual(33, self.main.get_life_path_number(), msg = "Test Case #2 Failed")
+        with open(input_file, "r") as inFile:
+            test_cases = inFile.readlines()
 
+            # Test case #1: Enters While loop -> 01-01-1901,4
+            
+            # Test case #2: Enters if in while loop -> 20 April 1998,33
+        for case in test_cases:
+            givenDate, expected_result = case.strip().split(",")
+        
+            try:
+                birthday = datetime.strptime(givenDate, "%d-%m-%Y").strftime("%d%m%Y")
+            except ValueError:
+                birthday = datetime.strptime(givenDate, "%d %B %Y").strftime("%d%m%Y")
+
+            self.main = Person("test", birthday)
+            actual_result = self.main.get_life_path_number()
+
+            with open(output_file, "w") as outFile:
+                outFile.write( str(actual_result) + "\n")
+
+            with open(output_file, "r") as outFile:
+                self.assertEqual(expected_result+"\n", outFile.readline())
+            os.remove("code/output.txt")
 
     
     def test_get_generation(self):
@@ -143,7 +155,7 @@ class TestHelper(unittest.TestCase):
         self.assertFalse(Helper.is_master_number([11]))
 
     def test_life_path_compare(self):
-        # Test case 1: num is a master number (11)
+
         person1 = Mock()
         person2 = Mock()
 
@@ -170,9 +182,3 @@ class TestHelper(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 
-
-
-
-
-# boundary value unit test
-#file input output
