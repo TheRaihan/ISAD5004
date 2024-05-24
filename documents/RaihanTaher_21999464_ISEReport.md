@@ -2,21 +2,8 @@
 
 This Python codebase is designed to findout life path numbers, lucky colors of people based on their birthdate using object-oriented programming. It includes functionality for parsing different birthday formats, determining generation, and validating user input. We can also findout if two person are from same life path number and whether that number is master number or not.
 
-I applied modularity concept along with object-oriented programming to reduce coupling and to improve cohesiveness of the program. Here I also applied blackbox testing and whitebox testing depending which one is more appropriate for that module. 
+We applied modularity concept along with object-oriented programming to reduce coupling and to improve cohesiveness of the program. Here I also applied blackbox testing and whitebox testing depending which one is more appropriate for that module. 
 
-
-## Git 
-At the beginning, I'm thinking about after doing initial setup in main branch, I'll do feature branch for all the distinct modules and then merge all of them in main branch. Ideally in software development its best practice to have a development branch and merge your feature branch there. Finally, when everything up and running fully tested, ready for release then it goes into main branch. But here as its a very small program and I'm the only developer here so for simplicity I'm not using the development branch for this program.
-
-#### Branch needed
-    - main
-    - input-birthday
-    - life-path-compare
-    - life-path-number
-    - lucky-color
-    - test-code
-
-Their purpose is self explainatory, after each job is done and tested to will be merged in the main branch. Thats the initial plan, which might slightly change while developing.
 
 # Module Description 
 
@@ -350,7 +337,7 @@ Here is the detailed approach and the test cases for each method:
 |-------------            |--------------|-----------------|
 | Master Number           | 33           | True            |
 | Not a Master Number     | 10           | False           |  
-| Invalid Data type       | "eleven"     | False           |
+| Invalid Data type       | "Taher"     | False           |
 | Invalid Input           | None         | False           |
 | Invalid Data type       | [11]         | False           |
 
@@ -366,7 +353,7 @@ Here is the detailed approach and the test cases for each method:
 |-----------------------------------  |-------     |-----------------|
 | Same life path number               | 5, 5       | True            |
 | Different life path number          | 1, 9       | False           | 
-| Invalid input (string)              | "5", 5     | False           |
+| Invalid input (string)              | "9464", 5     | False           |
 | Invalid input (None)                | None, 5    | False           | 
 
 #### 5. `Helper.get_valid_birthday_input` (Mock input for testing)
@@ -381,7 +368,7 @@ Here is the detailed approach and the test cases for each method:
 |-------------------------------------------------|-----------------------------------------|------------------|
 | Valid input (DD-MM-YYYY)                        | "01-01-2000\n"                          | "01012000"       | 
 | Valid input (DD Month YYYY)                     | "15 June 1995\n"                        | "15061995"       |
-| Multiple invalid inputs then by input           | "invalid\n22 Feb 2022\n05 May 2023\n"   | "05052023"       |
+| Multiple invalid inputs then by input           | "TAHER 9464\n22 Feb 2022\n05 May 2023\n"   | "05052023"       |
 
 ## Summary
 
@@ -454,7 +441,7 @@ These are the unit test modules we have here.
 | Else If (1980 - 1994)             | 23041980       | Millennials     | 
 | Else If (1995 - 2009)             | 23041995       | Generation Z    | 
 | Else If (2010 - 2024)             | 23042010       | Generation Alpha| 
-| Else                              | 23042025       | Unknown         | 
+| Else                              | 21999464       | Unknown         | <!-- Student ID -->
 
 #### 3.Test design for `TestHelper.test_valid_birthday`
 
@@ -508,3 +495,109 @@ Example of running test modules with one failed case
 Example of running all test modules successfully
 ![image info](./pictures/3.png)
 
+
+As I mentioned in the refactoring section that perse_birthday() & input_validation() modules have been improved as it was much harder design test code for them with such strong coupling. 
+
+# Summary
+
+Here is the summary table for the things covered for the program
+
+|             | Design  | of |test |cases | | Test code    | implementation|and execution|
+|-------------|---------    |---        |---|--------------------------------------|---|---|---|---|
+| Module name  | BB (EP)     | BB (BVA)     | WB |     Data type/s | Form of Input/output    | EP |         BVA     | White-Box |
+| Person.get_lucky_color  | not done  | not done  | not done |   int   |    perameter        | not done    | not done  |        not done   |
+| Person.get_life_path_number | done    | not done  | done      |  string     | file input     |  done           |  not done   | done  |   
+| Person.get_generation | not done    |  done  | done      |  string     | perameter         |  not done           |  done   | done  |   
+| Helper.sum_digits     |   done    | not done    | done   |  int     |    perameter               | done    | not done    |  done         |
+| Helper.is_master_number  | done|  not done    | done     | int        |   perameter            | done    | not done     | done           |
+| Helper.lifePathCompare| done| not done        | done    | object     |perameter             | done     | not done        | done          |
+| Helper.get_valid_birthday_input  | done|not done|done| string | keyboard input            | done   | not done             |  done        |
+
+
+# Version Control
+
+## Git 
+At the beginning, We were thinking about after doing initial setup in main branch, we'll do feature branch for all the distinct modules and then merge all of them in main branch. Ideally in software development its best practice to have a development branch and merge your feature branch there. Finally, when everything up and running fully tested, ready for release then it goes into main branch. But here as its a very simple program and I'm the only developer here so for simplicity we are not using the development branch for this program.
+
+#### Branch used
+    - main
+    - input-birthday
+    - life-path-compare
+    - life-path-number
+    - lucky-color
+    - test-code
+
+Their purpose is self explainatory, after each job is done and tested to will be merged in the main branch. Thats the initial plan, which might slightly change while developing.
+
+Log of the use of Version Control:
+
+![image info](./pictures/log1.png)
+
+![image info](./pictures/log2.png)
+
+![image info](./pictures/log3.png)
+
+![image info](./pictures/log4.png)
+
+# Summary
+
+## Achievements
+
+### Code Implementation
+- Developed the `Person` class with methods to calculate the life path number and determine the generation based on birth year.
+- Implemented the `Helper` class with utility methods for summing digits, checking master numbers, and comparing life path numbers.
+- Created a function to validate and format birthday inputs.
+
+### Testing
+- Designed test cases using Equivalence Partitioning and Boundary Value Analysis for the appropriate methods.
+- Implemented unit tests for the `Person` and `Helper` classes covering various scenarios and edge cases.
+- Verified the functionality and robustness of the code through extensive testing.
+
+### Documentation
+- Provided detailed explanations of the modularity concepts applied in the code.
+- Created a markdown file to document everythhing we have done including test design and implementation facilitating clear understanding and review.
+
+## Challenges Faced
+
+### Handling Date Inputs
+- Ensuring accurate parsing and validation of various date formats was challenging.
+- Addressing potential user input errors required robust error handling.
+
+### Test Case Design
+- Designing comprehensive test cases that cover all possible input scenarios.
+- Ensuring the tests accurately reflect real-world inputs and edge cases.
+
+
+## Limitations
+
+### Generation Ranges
+- The generation ranges are hardcoded and might not cover future generations or changes in generational definitions.
+- The "Unknown Generation" category might need more nuanced handling for future years beyond 2024.
+
+### Date Handling
+- The current implementation only supports specific date formats (`DD-MM-YYYY` and `DD Month YYYY`).
+- There is no support for alternative date formats or localization.
+
+### User Input
+- The `get_valid_birthday_input` method relies on console input, which may not be ideal for all applications.
+
+## Ways to Improve
+
+### Dynamic Generation Handling
+- Implement a more flexible approach to handle future generational ranges dynamically.
+- Allow updates to the generation ranges without modifying the core logic.
+
+### Enhanced Date Parsing
+- Expand support for additional date formats and localization to cater to a wider user base.
+- Implement more sophisticated date validation to handle edge cases and invalid dates gracefully.
+
+### User Interface
+- Develop a graphical user interface (GUI) or web-based interface to improve user experience.
+- Provide clearer error messages and guidance for user inputs.
+
+## Additional Information
+- The project demonstrates the application of software engineering principles, including modularity, encapsulation, and thorough testing.
+- The code is designed to be easily extensible, allowing for future enhancements and modifications.
+- Detailed documentation and test cases ensure maintainability and ease of understanding for future developers.
+
+By addressing the identified limitations and implementing the suggested improvements, the project can be further refined to provide a more robust and user-friendly experience.
