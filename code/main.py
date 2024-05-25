@@ -15,6 +15,7 @@ class Person:
         }
         return lucky_colors.get(self.life_path_num)
 
+
     def get_life_path_number(self):
         life_path_num = int(self.birthday)
         while life_path_num > 9:
@@ -22,6 +23,7 @@ class Person:
             if Helper.is_master_number(life_path_num):
                 break
         return life_path_num
+        
 
     def get_generation(self):
         year = int(self.birthday[-4:])
